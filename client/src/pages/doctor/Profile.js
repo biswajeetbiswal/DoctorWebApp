@@ -37,7 +37,7 @@ const Profile = () => {
       dispatch(hideLoading());
       if (res.data.success) {
         message.success(res.data.message);
-        navigate("/");
+        navigate("/home");
       } else {
         message.error(res.data.success);
       }
@@ -75,7 +75,7 @@ const Profile = () => {
   }, []);
   return (
     <Layout>
-      <h1>Manage Profile</h1>
+      <h1 className="text-center">Manage Profile</h1>
       {doctor && (
         <Form
           layout="vertical"
@@ -89,7 +89,7 @@ const Profile = () => {
             ],
           }}
         >
-          <h4 className="">Personal Details : </h4>
+          <h4>Personal Details : </h4>
           <Row gutter={20}>
             <Col xs={24} md={24} lg={8}>
               <Form.Item

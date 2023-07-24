@@ -34,7 +34,7 @@ const ApplyDoctor = () => {
       dispatch(hideLoading());
       if (res.data.success) {
         message.success(res.data.message);
-        navigate("/");
+        navigate("/home");
       } else {
         message.error(res.data.message);
       }
@@ -57,7 +57,11 @@ const ApplyDoctor = () => {
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your first name" />
+              <Input
+                type="text"
+                className="border border-dark"
+                placeholder="your first name"
+              />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
@@ -67,7 +71,11 @@ const ApplyDoctor = () => {
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your last name" />
+              <Input
+                type="text"
+                className="border border-dark"
+                placeholder="your last name"
+              />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
@@ -77,7 +85,11 @@ const ApplyDoctor = () => {
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your contact no" />
+              <Input
+                type="text"
+                className="border border-dark"
+                placeholder="your contact no"
+              />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
@@ -87,12 +99,20 @@ const ApplyDoctor = () => {
               required
               rules={[{ required: true }]}
             >
-              <Input type="email" placeholder="your email address" />
+              <Input
+                type="email"
+                className="border border-dark"
+                placeholder="your email address"
+              />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
             <Form.Item label="Website" name="website">
-              <Input type="text" placeholder="your website" />
+              <Input
+                type="text"
+                className="border border-dark"
+                placeholder="your website"
+              />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
@@ -102,7 +122,11 @@ const ApplyDoctor = () => {
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your clinic address" />
+              <Input
+                type="text"
+                className="border border-dark"
+                placeholder="your clinic address"
+              />
             </Form.Item>
           </Col>
         </Row>
@@ -115,7 +139,11 @@ const ApplyDoctor = () => {
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your specialization" />
+              <Input
+                type="text"
+                className="border border-dark"
+                placeholder="your specialization"
+              />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
@@ -125,7 +153,11 @@ const ApplyDoctor = () => {
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your experience" />
+              <Input
+                type="text"
+                className="border border-dark"
+                placeholder="your experience"
+              />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
@@ -135,12 +167,19 @@ const ApplyDoctor = () => {
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your contact no" />
+              <Input
+                type="text"
+                className="border border-dark"
+                placeholder="your contact no"
+              />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
             <Form.Item label="Timings" name="timings" required>
-              <TimePicker.RangePicker format="HH:mm" />
+              <TimePicker.RangePicker
+                format="HH:mm"
+                className="border border-dark"
+              />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}></Col>

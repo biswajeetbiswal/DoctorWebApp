@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const doctorModel = require("../models/doctorModel");
 const appointmentModel = require("../models/appointmentModel");
-const moment = require("moment");
+
 //register callback
 const registerController = async (req, res) => {
   try {
@@ -11,15 +11,18 @@ const registerController = async (req, res) => {
     if (exisitingUser) {
       return res
         .status(200)
-        .send({ message: "User Already Exist", success: false });
+        .json({ message: "User Already Exist", success: false });
     }
+
     const password = req.body.password;
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
     req.body.password = hashedPassword;
+
     const newUser = new userModel(req.body);
     await newUser.save();
-    res.status(201).send({ message: "Register Sucessfully", success: true });
+
+    res.status(201).json({ message: "Register Sucessfully", success: true });
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -157,7 +160,9 @@ const deleteAllNotificationController = async (req, res) => {
     });
   }
 };
+//
 
+//
 //GET ALL DOC
 const getAllDocotrsController = async (req, res) => {
   try {
@@ -180,22 +185,42 @@ const getAllDocotrsController = async (req, res) => {
 //BOOK APPOINTMENT
 const bookeAppointmnetController = async (req, res) => {
   try {
-    req.body.date = moment(req.body.date, "DD-MM-YYYY").toISOString();
-    req.body.time = moment(req.body.time, "HH:mm").toISOString();
+    req.body.date = req.body.date;
+    req.body.time = req.body.time;
     req.body.status = "pending";
-    const newAppointment = new appointmentModel(req.body);
-    await newAppointment.save();
-    const user = await userModel.findOne({ _id: req.body.doctorInfo.userId });
-    user.notifcation.push({
-      type: "New-appointment-request",
-      message: `A nEw Appointment Request from ${req.body.userInfo.name}`,
-      onCLickPath: "/user/appointments",
+
+    const date = req.body.date;
+    let fromTime = req.body.time.split(":");
+
+    fromTime[1] = "00";
+
+    fromTime = fromTime.join(":");
+    const doctorId = req.body.doctorId;
+    const appointments = await appointmentModel.find({
+      doctorId,
+      date,
+      time: fromTime,
     });
-    await user.save();
-    res.status(200).send({
-      success: true,
-      message: "Appointment Book succesfully",
-    });
+    if (appointments.length > 0) {
+      return res.status(200).send({
+        message: "Appointments not Availibale at this time",
+        success: true,
+      });
+    } else {
+      const newAppointment = new appointmentModel(req.body);
+      await newAppointment.save();
+      const user = await userModel.findOne({ _id: req.body.doctorInfo.userId });
+      user.notifcation.push({
+        type: "New-appointment-request",
+        message: `A new Appointment Request from ${req.body.userInfo.name} id ${req.body.userInfo._id}`,
+        onCLickPath: "/user/appointments",
+      });
+      await user.save();
+      res.status(200).send({
+        success: true,
+        message: "Appointment Book succesfully",
+      });
+    }
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -209,20 +234,19 @@ const bookeAppointmnetController = async (req, res) => {
 // booking bookingAvailabilityController
 const bookingAvailabilityController = async (req, res) => {
   try {
-    const date = moment(req.body.date, "DD-MM-YY").toISOString();
-    const fromTime = moment(req.body.time, "HH:mm")
-      .subtract(1, "hours")
-      .toISOString();
-    const toTime = moment(req.body.time, "HH:mm").add(1, "hours").toISOString();
+    const date = req.body.date;
+    let fromTime = req.body.time.split(":");
+
+    fromTime[1] = "00";
+
+    fromTime = fromTime.join(":");
     const doctorId = req.body.doctorId;
     const appointments = await appointmentModel.find({
       doctorId,
       date,
-      time: {
-        $gte: fromTime,
-        $lte: toTime,
-      },
+      time: fromTime,
     });
+    //console.log(appointments);
     if (appointments.length > 0) {
       return res.status(200).send({
         message: "Appointments not Availibale at this time",

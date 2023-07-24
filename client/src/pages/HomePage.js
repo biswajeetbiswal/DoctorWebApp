@@ -28,10 +28,11 @@ const HomePage = () => {
   useEffect(() => {
     getUserData();
   }, []);
+
   return (
     <Layout>
-      <h1 className="text-center">Home Page</h1>
-      <Row>
+      <h1 className="text-center">Dashboard</h1>
+      <Row className="doctors-list">
         {doctors && doctors.map((doctor) => <DoctorList doctor={doctor} />)}
       </Row>
     </Layout>

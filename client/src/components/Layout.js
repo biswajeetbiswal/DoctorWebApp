@@ -5,6 +5,7 @@ import { adminMenu, userMenu } from "./../Data/data";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Badge, message } from "antd";
+
 const Layout = ({ children }) => {
   const { user } = useSelector((state) => state.user);
   const location = useLocation();
@@ -13,19 +14,16 @@ const Layout = ({ children }) => {
   const handleLogout = () => {
     localStorage.clear();
     message.success("Logout Successfully");
-    navigate("/login");
+    navigate("/");
   };
+  //
 
+  //
   // =========== doctor menu ===============
   const doctorMenu = [
     {
-      name:"First",
-      path:"/first",
-      icon: "fa-solid fa-house",
-    },
-    {
-      name: "Home",
-      path: "/",
+      name: "Dashboard",
+      path: "/home",
       icon: "fa-solid fa-house",
     },
     {
@@ -71,7 +69,7 @@ const Layout = ({ children }) => {
               })}
               <div className={`menu-item `} onClick={handleLogout}>
                 <i className="fa-solid fa-right-from-bracket"></i>
-                <Link to="/login">Logout</Link>
+                <Link to="/">Logout</Link>
               </div>
             </div>
           </div>

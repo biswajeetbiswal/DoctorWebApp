@@ -6,7 +6,7 @@ import { DatePicker, message, TimePicker } from "antd";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
-
+import "../styles/Book.css";
 const BookingPage = () => {
   const { user } = useSelector((state) => state.user);
   const params = useParams();
@@ -37,7 +37,7 @@ const BookingPage = () => {
   // ============ handle availiblity
   const handleAvailability = async () => {
     try {
-      dispatch(showLoading());
+      // dispatch(showLoading());
       const res = await axios.post(
         "/api/v1/user/booking-availbility",
         { doctorId: params.doctorId, date, time },
@@ -47,7 +47,7 @@ const BookingPage = () => {
           },
         }
       );
-      dispatch(hideLoading());
+      // dispatch(hideLoading());
       if (res.data.success) {
         setIsAvailable(true);
         console.log(isAvailable);
@@ -56,7 +56,7 @@ const BookingPage = () => {
         message.error(res.data.message);
       }
     } catch (error) {
-      dispatch(hideLoading());
+      // dispatch(hideLoading());
       console.log(error);
     }
   };
@@ -100,44 +100,57 @@ const BookingPage = () => {
   }, []);
   return (
     <Layout>
-      <h3>Booking Page</h3>
-      <div className="container m-2">
+      <h3 className="text-center">Booking Page</h3>
+      <div className="book">
         {doctors && (
           <div>
             <h4>
               Dr.{doctors.firstName} {doctors.lastName}
             </h4>
-            <h4>Fees : {doctors.feesPerCunsaltation}</h4>
-            <h4>
+            <div>
+              <h5>Fees : {doctors.feesPerCunsaltation}</h5>
+              <h5>Address:{doctors.address}</h5>
+            </div>
+            <h5>Specialization : {doctors.specialization}</h5>
+            <h5>
               Timings : {doctors.timings && doctors.timings[0]} -{" "}
-              {doctors.timings && doctors.timings[1]}{" "}
-            </h4>
-            <div className="d-flex flex-column w-50">
+              {doctors.timings && doctors.timings[1]}
+            </h5>
+            <h5>Select Date and time:</h5>
+            <div>
               <DatePicker
+                style={{ width: "200px" }}
                 aria-required={"true"}
-                className="m-2"
+                className="m-2 border border-dark"
                 format="DD-MM-YYYY"
                 onChange={(value) => {
                   setDate(moment(value).format("DD-MM-YYYY"));
                 }}
               />
               <TimePicker
+                style={{ width: "200px" }}
                 aria-required={"true"}
                 format="HH:mm"
-                className="mt-3"
+                className="mt-3 border border-dark"
                 onChange={(value) => {
                   setTime(moment(value).format("HH:mm"));
                 }}
               />
-
+            </div>
+            <div className="">
               <button
-                className="btn btn-primary mt-2"
+                className="btn btn-primary m-2 "
+                style={{ width: "200px" }}
                 onClick={handleAvailability}
               >
                 Check Availability
               </button>
 
-              <button className="btn btn-dark mt-2" onClick={handleBooking}>
+              <button
+                style={{ width: "200px" }}
+                className="btn btn-dark  "
+                onClick={handleBooking}
+              >
                 Book Now
               </button>
             </div>

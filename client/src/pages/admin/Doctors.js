@@ -77,7 +77,12 @@ const Doctors = () => {
               Approve
             </button>
           ) : (
-            <button className="btn btn-danger">Reject</button>
+            <button
+              className="btn btn-danger"
+              onClick={() => handleAccountStatus(record, "pending")}
+            >
+              Reject
+            </button>
           )}
         </div>
       ),

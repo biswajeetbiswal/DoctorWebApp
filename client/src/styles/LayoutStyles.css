@@ -10,7 +10,7 @@
   min-height: 100%;
   width: 300px;
   border-radius: 5px;
-  background-color: rgb(51, 1, 1);
+  background-color: #0d3faa;
   box-shadow: 0 0 2px gray;
   margin-right: 20px;
   color: white;
@@ -28,7 +28,7 @@
   background-color: white;
 }
 .body {
-  height: 85vh;
+  min-height: 85vh;
   margin-bottom: 20px;
   box-shadow: 0 0 2px gray;
   background-color: white;
@@ -59,7 +59,7 @@
 }
 .active a,
 .active i {
-  color: rgb(51, 1, 1);
+  color: #0d3faa;
 }
 
 .header-content {

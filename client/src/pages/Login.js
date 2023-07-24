@@ -19,7 +19,7 @@ const Login = () => {
       if (res.data.success) {
         localStorage.setItem("token", res.data.token);
         message.success("Login Successfully");
-        navigate("/");
+        navigate("/home");
       } else {
         message.error(res.data.message);
       }
@@ -30,28 +30,39 @@ const Login = () => {
     }
   };
   return (
-    <div className="form-container ">
-      <Form
-        layout="vertical"
-        onFinish={onfinishHandler}
-        className="register-form"
-      >
-        <h3 className="text-center">Login From</h3>
+    <>
+      <div className="mai">
+        <div className="contain">
+          <div className="login_image"></div>
+          <div className="form-container ">
+            <Form
+              layout="vertical"
+              onFinish={onfinishHandler}
+              className="register-form"
+            >
+              <h1 className="text-center text-primary">Login From</h1>
 
-        <Form.Item label="Email" name="email">
-          <Input type="email" required />
-        </Form.Item>
-        <Form.Item label="Password" name="password">
-          <Input type="password" required />
-        </Form.Item>
-        <Link to="/register" className="m-2">
-          Not a user Register here
-        </Link>
-        <button className="btn btn-primary" type="submit">
-          Login
-        </button>
-      </Form>
-    </div>
+              <Form.Item label="Email" name="email">
+                <Input type="email" required className="border border-dark" />
+              </Form.Item>
+              <Form.Item label="Password" name="password">
+                <Input
+                  type="password"
+                  required
+                  className="border border-dark"
+                />
+              </Form.Item>
+              <Link to="/register" className="m-2">
+                Not a user Register here
+              </Link>
+              <button className="btn btn-primary" type="submit">
+                Login
+              </button>
+            </Form>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

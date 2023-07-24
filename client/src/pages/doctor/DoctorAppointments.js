@@ -3,7 +3,7 @@ import Layout from "./../../components/Layout";
 
 import axios from "axios";
 
-import moment from "moment";
+//import moment from "moment";
 import { message, Table } from "antd";
 
 const DoctorAppointments = () => {
@@ -51,16 +51,28 @@ const DoctorAppointments = () => {
 
   const columns = [
     {
-      title: "ID",
-      dataIndex: "_id",
+      title: "User ID",
+      dataIndex: "userId",
     },
+
+    // {
+    //   title: "Date & Time",
+    //   dataIndex: "date",
+    //   render: (text, record) => (
+    //     <span>
+    //       {moment(record.date).format("DD-MM-YYYY")} &nbsp;
+    //       {moment(record.time).format("HH:mm")}
+    //     </span>
+    //   ),
+    // },
+
     {
       title: "Date & Time",
       dataIndex: "date",
       render: (text, record) => (
         <span>
-          {moment(record.date).format("DD-MM-YYYY")} &nbsp;
-          {moment(record.time).format("HH:mm")}
+          {record.date} &nbsp;
+          {record.time}
         </span>
       ),
     },
@@ -95,7 +107,7 @@ const DoctorAppointments = () => {
   ];
   return (
     <Layout>
-      <h1>Appoinmtnets Lists</h1>
+      <h1 className="text-center">Appoinmtnets Lists</h1>
       <Table columns={columns} dataSource={appointments} />
     </Layout>
   );

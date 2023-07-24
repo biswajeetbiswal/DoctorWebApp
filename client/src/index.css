@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
 
 /* loader */
@@ -17,4 +20,27 @@
 .form-btn {
   width: 250px !important;
   margin-top: 30px !important;
+}
+
+.doctors-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 1em;
+  padding: 1em;
+}
+
+@media screen and (max-width: 1080px) {
+  .doctors-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (max-width: 768px) {
+  .doctors-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 560px) {
+  .doctors-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

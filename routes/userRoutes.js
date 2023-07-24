@@ -41,7 +41,9 @@ router.post(
   authMiddleware,
   deleteAllNotificationController
 );
+//
 
+//
 //GET ALL DOC
 router.get("/getAllDoctors", authMiddleware, getAllDocotrsController);
 

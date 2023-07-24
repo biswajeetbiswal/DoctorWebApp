@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Layout from "./../components/Layout";
-import moment from "moment";
+//import moment from "moment";
 import { Table } from "antd";
 
 const Appointments = () => {
@@ -45,13 +45,24 @@ const Appointments = () => {
     //   dataIndex: "phone",
     //   render: (text, record) => <span>{record.doctorInfo.phone}</span>,
     // },
+    // {
+    //   title: "Date & Time",
+    //   dataIndex: "date",
+    //   render: (text, record) => (
+    //     <span>
+    //       {moment(record.date).format("DD-MM-YYYY")} &nbsp;
+    //       {moment(record.time).format("HH:mm")}
+    //     </span>
+    //   ),
+    // },
+
     {
       title: "Date & Time",
       dataIndex: "date",
       render: (text, record) => (
         <span>
-          {moment(record.date).format("DD-MM-YYYY")} &nbsp;
-          {moment(record.time).format("HH:mm")}
+          {record.date} &nbsp;
+          {record.time}
         </span>
       ),
     },
@@ -63,7 +74,7 @@ const Appointments = () => {
 
   return (
     <Layout>
-      <h1>Appoinmtnets Lists</h1>
+      <h1 className="text-center">Appoinmtnets Lists</h1>
       <Table columns={columns} dataSource={appointments} />
     </Layout>
   );
