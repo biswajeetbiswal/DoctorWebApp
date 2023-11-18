@@ -33,7 +33,7 @@ const Welcome = () => {
             </p>
             <div className="d-flex gap-2">
               <Link to="/about">
-                <button className="btn btn-outline-primary">Learn more</button>
+                <button className="btn btn-outline-primary ">Learn more</button>
               </Link>
               <Link to="/register">
                 <button className="btn btn-primary">Get Started</button>
@@ -215,9 +215,8 @@ const Welcome = () => {
             </div>
           </div>
         </section>
-        
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };
